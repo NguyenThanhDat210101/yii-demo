@@ -21,6 +21,9 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+        'response' => [
+            'format' => \yii\web\Response::FORMAT_JSON
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -36,6 +39,20 @@ $config = [
             'viewPath' => '@app/mail',
             // send all mails to a file by default.
             'useFileTransport' => true,
+        ],
+        'i18n' => [
+            'translations' => [
+                'text/*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en',
+                    'basePath' => '@app/text',
+                    'fileMap' => [
+                        'text/en' => 'messages.php'
+                    ],
+
+                    // file is basePath + sourceLanguage + value fileMap
+                ],
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -56,7 +73,7 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                        'categories' =>  'category',
+                        'users' =>  'user',
                         'companies' =>  'company'
                     ]
                 ],

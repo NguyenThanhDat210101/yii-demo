@@ -7,9 +7,14 @@ use yii\db\ActiveRecord;
 class User extends ActiveRecord
 {
     // các field có thể get
-    // public function fields(){
-    //     return ['id', 'company'];
-    // }
+    public function fields()
+    {
+        return [
+            'id',
+            'email',
+            'name',
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -35,6 +40,7 @@ class User extends ActiveRecord
         return [
             'created_at',
             'email',
+            'company'
         ];
     }
 
@@ -43,7 +49,13 @@ class User extends ActiveRecord
         return [];
     }
 
-    public function company(){
-        return $this->hasOne(company::class, ['company_id' => 'id']);
+    public function getCompany()
+    {
+        return $this->hasOne(Company::class, ['id' => 'company_id']);
+    }
+
+    public function getName()
+    {
+        return  $this->family_name . $this->first_name;
     }
 }
